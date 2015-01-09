@@ -1,18 +1,16 @@
 # puts "Welcome to our Two Player Math Game"
-# puts "Player 1: What does 5 plus 3 equal?"
 
-# @p1="Sapphire"
-# @p2="Emerald"
-# @lives_score = {
-#   p1: 3,
-#   p2: 3
-# }
+@players = [
+  {id:1,
+    life: 3,
+    score:0,
+    name: "Sapphire"},
 
-
-def lost_life
-
-
-end
+  {id:2,
+    life: 3,
+    score:0,
+    name: "Emerald"}
+]
 
 def question
   @a =1+rand(20)
@@ -29,19 +27,25 @@ end
 def chk_ans
   if @c==@answer
     puts "Good Job!"
-
   else
-    #decrement life method
+    player[:life]
     puts "You lose a life...:("
 
   end
 end
 
 #want to output and keep track of who's turn it is
-# def your_turn(player)
-#   @lives_score.select { |switch| switch [:p1] }
-
-# end
+def game_time
+loop do
+    @players.each do |player|
+        if player[:life]==0
+          return
+        else
+          #do the game methods and adding scores to hash
+       end  
+   end
+end
+end
 
 # question
 # get_ans
