@@ -1,10 +1,10 @@
 @players = [
-  {id:1,
+  { id:1,
     life: 3,
     score:0,
     name: "Sapphire"},
 
-  {id:2,
+  { id:2,
     life: 3,
     score:0,
     name: "Emerald"}
@@ -16,14 +16,14 @@ def dead?
  dead = @players.detect { |player| player[:life] == 0 }
 # return any players with lives == 0
 # Call .empty? on result set
-  !dead.empty?
+  !(dead.nil?)
 end
 
 def question
   @a =1+rand(20)
   @b =rand(1..20)
   @c = @a.to_i + @b.to_i
-  puts "#{@current_player[:name]}What does #{@a} plus #{@b} equal?"
+  puts "#{@current_player[:name]} What does #{@a} plus #{@b} equal?"
 end
 
 def get_ans
@@ -57,37 +57,30 @@ def lose_life
 end
 
 ##want to output and keep track of who's turn it is
-def curr_player
+def curr_player(id)
   #this is how the players are switching on each turn
-  @current_player = @current_player[:id] == 1 ? @players[1] : @players[0] 
+  @current_player = (id == 1 ? @players[1] : @players[0])
 end
 
 def pick_a_player
 #KISS-->ie. do arrays have methods to randomly get an element? yes, use it.
   @players.sample[:id]
-  #@players.each do |player|
-      # if rand(1..100) <51 
-      #   player[:id] = 1
-      #   puts "#{player[:id]}"
-         
-      # else 
-      #   puts "#{player[:id]}"
-      #   return player[:id]=2
-      # end 
-  #end
+  
 end
 
 
 def game_time
+finish = false
 puts "Welcome to our Two Player Math Game" 
-pick_a_player
-  loop do
-    curr_player
+player1_id = pick_a_player
+  until finish  
       @players.each do |player|
+         curr_player(player[:id])
           question
           get_ans
           chk_ans
-          dead?
+          puts "#{player[:name]}life:#{player[:life]}"
+          finish = dead? 
       end
   end
 end
